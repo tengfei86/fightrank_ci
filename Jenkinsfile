@@ -27,7 +27,7 @@ spec:
   - name: kaniko
     image: daocloud.io/gcr-mirror/kaniko-project-executor:latest
     args:
-    - --dockerfile=./Dockerfile
+    - --dockerfile=Dockerfile
     - --context=dir://. 
     - --destination=blade2gt/rainfall-backend:v1.0
     env:
