@@ -25,7 +25,7 @@ spec:
       # ubuntu runs as root by default, it is recommended or even mandatory in some environments (such as pod security admission "restricted") to run as a non-root user.
       runAsUser: 1000
   - name: kaniko
-    image: gcr.io/kaniko-project/executor:latest
+    image: daocloud.io/gcr-mirror/kaniko-project-executor:latest
     args:
     - --dockerfile=/workspace/Dockerfile
     - --context=dir:///workspace
@@ -50,8 +50,17 @@ spec:
         }
     }
     stages {
+        stage('Pull from Secondary Git Repository') {
+         steps {
+             script {
+                 git branch: 'main', 
+                     url: 'https://gitee.com/jonasyeah/waterloggingforcast.git'
+             }
+         }
+        }
         stage('Main') {
             steps {
+                sh 'ls -l'
                 sh 'hostname'
             }
         }
